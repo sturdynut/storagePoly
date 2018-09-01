@@ -23,17 +23,13 @@ class Storage {
   }
 }
 
-const owns = (key) => Storage.prototype.hasOwnProperty(key);
-
 const handler = {
   get: function(target, key) {
-    if (owns(key)) return target[key];
+    if (Storage.prototype.hasOwnProperty(key)) return target[key];
     if (storageMap.has(key)) return target.getItem(key);
-    return Reflect.get(...arguments);
   },
   set: function(target, key, value) {
-    if (owns(key)) target[key] = value;
-    else target.setItem(key, value);
+    return target.setItem(key, value);
   }
 }
 

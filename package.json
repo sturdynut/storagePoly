@@ -14,6 +14,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "test:watch": "jest --watch",
+    "test:watch:coverage": "jest --watch --coverage",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "devDependencies": {

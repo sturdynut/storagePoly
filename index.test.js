@@ -7,136 +7,85 @@ const methods = [
   'clear'
 ];
 
-describe('localStorage', () => {
-  test('Interface methods', () => {
-    expect(localStorage).toBeTruthy();
-    methods.forEach(m => expect(typeof localStorage[m]).toEqual('function'));
-  });
+const storageMechansisms = [
+  { name: 'localStorage', storage: localStorage },
+  { name: 'sessionStorage', storage: sessionStorage }
+];
 
-  test('Setting and getting an item', () => {
-    const key = 'myKey';
-    const value = 'myValue';
-    localStorage.setItem(key, value);
+storageMechansisms.forEach(({ name, storage }) => {
+  describe(name, () => {
+    test(`${name} - Interface methods`, () => {
+      expect(storage).toBeTruthy();
+      methods.forEach(m => expect(typeof storage[m]).toEqual('function'));
+    });
 
-    const returnValue1 = localStorage.getItem(key);
-    const returnValue2 = localStorage[key];
+    test(`${name} - Setting and getting an item`, () => {
+      const key = 'myKey';
+      const value = 'myValue';
+      const value2 = 'myValue2';
 
-    expect(returnValue1).toEqual(value);
-    expect(returnValue2).toEqual(value);
-  });
+      sessionStorage.setItem(key, value);
+      const returnValue1 = sessionStorage.getItem(key);
 
-  test('Removing an item', () => {
-    const key = 'myKey';
-    const value = 'myValue';
-    const key2 = 'myKey2';
-    const value2 = 'myValue2';
+      sessionStorage[key] = value;
+      const returnValue2 = sessionStorage[key];
 
-    localStorage.setItem(key, value);
-    localStorage.setItem(key2, value2);
+      sessionStorage.myKey = value;
+      const returnValue3 = sessionStorage.myKey;
 
-    expect(localStorage.getItem(key)).toEqual(value);
-    expect(localStorage.getItem(key2)).toEqual(value2);
+      sessionStorage.myKey = value2;
 
-    localStorage.removeItem(key);
+      expect(returnValue1).toEqual(value);
+      expect(returnValue2).toEqual(value);
+      expect(returnValue3).toEqual(value);
+    });
 
-    expect(localStorage.getItem(key)).toBeUndefined();
-    expect(localStorage.getItem(key2)).toEqual(value2);
-  });
+    test(`${name} - Removing an item`, () => {
+      const key = 'myKey';
+      const value = 'myValue';
+      const key2 = 'myKey2';
+      const value2 = 'myValue2';
 
-  test('Clearing items', () => {
-    const items = [ 'cats', 'in', 'snow' ];
+      storage.setItem(key, value);
+      storage.setItem(key2, value2);
 
-    items.forEach(item => localStorage.setItem(item, `${item}-value`));
-    items.forEach(item => expect(localStorage.getItem(item)).toEqual(`${item}-value`));
+      expect(storage.getItem(key)).toEqual(value);
+      expect(storage.getItem(key2)).toEqual(value2);
 
-    localStorage.clear();
+      storage.removeItem(key);
 
-    items.forEach(item => expect(localStorage.getItem(item)).toBeUndefined());
-  });
+      expect(storage.getItem(key)).toBeUndefined();
+      expect(storage.getItem(key2)).toEqual(value2);
+    });
 
-  test('Length of items', () => {
-    const items = [ 'cats', 'in', 'snow' ];
-    const expectedLength = items.length;
+    test(`${name} - Clearing items`, () => {
+      const items = [ 'cats', 'in', 'snow' ];
 
-    items.forEach(item => localStorage.setItem(item, `${item}-value`));
+      items.forEach(item => storage.setItem(item, `${item}-value`));
+      items.forEach(item => expect(storage.getItem(item)).toEqual(`${item}-value`));
 
-    expect(localStorage.length).toEqual(expectedLength);
-  });
+      storage.clear();
 
-  test('Retrieval by key', () => {
-    const items = [ 'cats', 'in', 'snow' ];
-    const index = 0;
-    const expectedKey = items[index];
+      items.forEach(item => expect(storage.getItem(item)).toBeUndefined());
+    });
 
-    items.forEach(item => localStorage.setItem(item, `${item}-value`));
+    test(`${name} - Length of items`, () => {
+      const items = [ 'cats', 'in', 'snow' ];
+      const expectedLength = items.length;
 
-    expect(localStorage.key(index)).toEqual(expectedKey);
-  });
-});
+      items.forEach(item => storage.setItem(item, `${item}-value`));
 
-describe('sessionStorage', () => {
-  test('Interface methods', () => {
-    expect(sessionStorage).toBeTruthy();
-    methods.forEach(m => expect(typeof sessionStorage[m]).toEqual('function'));
-  });
+      expect(storage.length).toEqual(expectedLength);
+    });
 
-  test('Setting and getting an item', () => {
-    const key = 'myKey';
-    const value = 'myValue';
-    sessionStorage.setItem(key, value);
+    test(`${name} - Retrieval by key`, () => {
+      const items = [ 'cats', 'in', 'snow' ];
+      const index = 0;
+      const expectedKey = items[index];
 
-    const returnValue1 = sessionStorage.getItem(key);
-    const returnValue2 = sessionStorage[key];
+      items.forEach(item => storage.setItem(item, `${item}-value`));
 
-    expect(returnValue1).toEqual(value);
-    expect(returnValue2).toEqual(value);
-  });
-
-  test('Removing an item', () => {
-    const key = 'myKey';
-    const value = 'myValue';
-    const key2 = 'myKey2';
-    const value2 = 'myValue2';
-
-    sessionStorage.setItem(key, value);
-    sessionStorage.setItem(key2, value2);
-
-    expect(sessionStorage.getItem(key)).toEqual(value);
-    expect(sessionStorage.getItem(key2)).toEqual(value2);
-
-    sessionStorage.removeItem(key);
-
-    expect(sessionStorage.getItem(key)).toBeUndefined();
-    expect(sessionStorage.getItem(key2)).toEqual(value2);
-  });
-
-  test('Clearing items', () => {
-    const items = [ 'cats', 'in', 'snow' ];
-
-    items.forEach(item => sessionStorage.setItem(item, `${item}-value`));
-    items.forEach(item => expect(sessionStorage.getItem(item)).toEqual(`${item}-value`));
-
-    sessionStorage.clear();
-
-    items.forEach(item => expect(sessionStorage.getItem(item)).toBeUndefined());
-  });
-
-  test('Length of items', () => {
-    const items = [ 'cats', 'in', 'snow' ];
-    const expectedLength = items.length;
-
-    items.forEach(item => sessionStorage.setItem(item, `${item}-value`));
-
-    expect(sessionStorage.length).toEqual(expectedLength);
-  });
-
-  test('Retrieval by key', () => {
-    const items = [ 'cats', 'in', 'snow' ];
-    const index = 0;
-    const expectedKey = items[index];
-
-    items.forEach(item => sessionStorage.setItem(item, `${item}-value`));
-
-    expect(sessionStorage.key(index)).toEqual(expectedKey);
+      expect(storage.key(index)).toEqual(expectedKey);
+    });
   });
 });
