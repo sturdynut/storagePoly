@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/sturdynut/storagePoly/tree/master.svg?style=svg)](https://circleci.com/gh/sturdynut/storagePoly/tree/master)
+[![CircleCI](https://circleci.com/gh/sturdynut/storagePoly/tree/master.svg?style=svg&circle-token=c75d9cef31f5d841ff8201af2923ade3e7500602)](https://circleci.com/gh/sturdynut/storagePoly/tree/master)
 
 # Storage Poly
 
