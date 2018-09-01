@@ -1,5 +1,8 @@
 [![CircleCI](https://circleci.com/gh/sturdynut/storagePoly/tree/master.svg?style=svg&circle-token=c75d9cef31f5d841ff8201af2923ade3e7500602)](https://circleci.com/gh/sturdynut/storagePoly/tree/master)
 
+[![Coverage Status](https://coveralls.io/repos/github/sturdynut/storagePoly/badge.svg?branch=master)](https://coveralls.io/github/sturdynut/storagePoly?branch=master)
+
+
 # Storage Poly
 
 A polyfill for localStorage and sessionStorage for those times when they're undefined.
