@@ -1,6 +1,6 @@
 {
   "name": "storagepoly",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A polyfill for localStorage and sessionStorage for those times when they're undefined.",
   "main": "index.js",
   "repository": "git@github.com:sturdynut/storagePoly.git",
