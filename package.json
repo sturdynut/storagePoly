@@ -6,6 +6,12 @@
   "repository": "git@github.com:sturdynut/storagePoly.git",
   "author": "Matti Salokangas <matti.salokangas@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "localStorage",
+    "sessionStorage",
+    "polyfill",
+    "node"
+  ],
   "bugs": {
     "url": "https://github.com/sturdynut/storagePoly/issues"
   },
