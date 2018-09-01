@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/sturdynut/storagePoly/tree/master.svg?style=svg)](https://circleci.com/gh/sturdynut/storagePoly/tree/master)
+
 # Storage Poly
 
 A polyfill for localStorage and sessionStorage for those times when they're undefined.
